@@ -1,14 +1,16 @@
 # Stopwatch
 
-A sleek, high-performance stopwatch built with zero dependencies. This project focuses on high-impact aesthetics (Neon UI) using the smallest possible code footprint.
+⏱️ Minimalist Monospace Stopwatc
+A lightweight, high-precision stopwatch built with Vanilla JavaScript, HTML5, and CSS3. This project features a dark-mode "terminal" aesthetic with glowing typography and responsive controls.
 
-## 🚀 Features
+🚀 Features
+Precision Tracking: Measures time down to the hundredth of a second (centiseconds).
 
+Cyberpunk Aesthetic: High-contrast dark theme with white text-shadow effects.
 
-* **Monospaced Precision:** No "jitter" during time increments.
-* **Sub-100 Lines:** Pure HTML, CSS, and Vanilla JS.
-* **Responsive:** Works on mobile and desktop browsers.
+Zero Dependencies: Built entirely with standard web technologies.
 
+Responsive UI: Centered layout using Flexbox for a consistent experience across screen sizes.
 ## 🛠️ Tech Stack
 
 * **Structure:** HTML5
