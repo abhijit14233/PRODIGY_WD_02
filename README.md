@@ -1,6 +1,6 @@
 # Stopwatch
 
-## ⏱️ Minimalist Monospace Stopwatc
+## ⏱️ Minimalist Monospace Stopwatch
 A lightweight, high-precision stopwatch built with Vanilla JavaScript, HTML5, and CSS3. This project features a dark-mode "terminal" aesthetic with glowing typography and responsive controls.
 
 ## 🚀 Features
