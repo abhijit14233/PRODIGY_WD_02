@@ -1,4 +1,4 @@
-PRODIGY_WD_02
+PRODIGY_WD_2
 #⏱️Stopwatch
 
 ⏱️ Minimalist Neon Stopwatch
