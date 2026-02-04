@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body { background: #0e0e0e; color: #fcfcfc; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: 'Courier New', monospace; margin: 0; }
+        #display { font-size: 5rem; text-shadow: 0 0 20px #ffffff; margin-bottom: 20px; }
+        button { background: transparent; border: 1px solid #ffffff; color: #ffffff; padding: 10px 20px; cursor: pointer; font-family: inherit; transition: 0.3s; }
+        button:hover { background: #ffffff; color: #0e0e0e; }
+    </style>
+</head>
+<body>
+
+    <div id="display">00:00:00</div>
+    <div>
+        <button onclick="start()">START</button>
+        <button onclick="stop()">STOP</button>
+        <button onclick="reset()">RESET</button>
+    </div>
+
+    <script>
+        let time = 0, timer;
+        const display = document.getElementById('display');
+
+        function start() {
+            if (!timer) timer = setInterval(() => {
+                time++;
+                let m = Math.floor(time / 6000), s = Math.floor((time % 6000) / 100), ms = time % 100;
+                display.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}:${ms.toString().padStart(2, '0')}`;
+            }, 10);
+        }
+
+        function stop() { clearInterval(timer); timer = null; }
+        function reset() { stop(); time = 0; display.innerText = "00:00:00"; }
+    </script>
+</body>
+</html>
