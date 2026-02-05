@@ -2,35 +2,116 @@
 <html lang="en">
 <head>
     <style>
-        body { background: #0e0e0e; color: #fcfcfc; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: 'Courier New', monospace; margin: 0; }
+        body { 
+            background: #0e0e0e; 
+            color: #fcfcfc; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            font-family: 'Courier New', monospace; 
+            margin: 0; 
+            padding: 20px;
+        }
         #display { font-size: 5rem; text-shadow: 0 0 20px #ffffff; margin-bottom: 20px; }
-        button { background: transparent; border: 1px solid #ffffff; color: #ffffff; padding: 10px 20px; cursor: pointer; font-family: inherit; transition: 0.3s; }
+        
+        .controls { margin-bottom: 30px; }
+        
+        button { 
+            background: transparent; 
+            border: 1px solid #ffffff; 
+            color: #ffffff; 
+            padding: 10px 20px; 
+            cursor: pointer; 
+            font-family: inherit; 
+            transition: 0.3s; 
+            margin: 5px;
+        }
+        
         button:hover { background: #ffffff; color: #0e0e0e; }
+
+        
+        #laps {
+            width: 300px;
+            max-height: 200px;
+            overflow-y: auto;
+            border-top: 1px solid #444;
+            padding-top: 10px;
+        }
+        .lap-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 10px;
+            border-bottom: 1px solid #222;
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
 
     <div id="display">00:00:00</div>
-    <div>
+    
+    <div class="controls">
         <button onclick="start()">START</button>
+        <button onclick="lap()">LAP</button>
         <button onclick="stop()">STOP</button>
         <button onclick="reset()">RESET</button>
     </div>
 
+    <div id="laps"></div>
+
     <script>
         let time = 0, timer;
         const display = document.getElementById('display');
+        const lapsContainer = document.getElementById('laps');
+        let lapCount = 0;
 
         function start() {
             if (!timer) timer = setInterval(() => {
                 time++;
-                let m = Math.floor(time / 6000), s = Math.floor((time % 6000) / 100), ms = time % 100;
-                display.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}:${ms.toString().padStart(2, '0')}`;
+                display.innerText = formatTime(time);
             }, 10);
         }
 
-        function stop() { clearInterval(timer); timer = null; }
-        function reset() { stop(); time = 0; display.innerText = "00:00:00"; }
+    
+        function formatTime(t) {
+            let m = Math.floor(t / 6000), 
+                s = Math.floor((t % 6000) / 100), 
+                ms = t % 100;
+            return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}:${ms.toString().padStart(2, '0')}`;
+        }
+
+        function lap() {
+            if (timer) { 
+                lapCount++;
+                const lapElement = document.createElement('div');
+                lapElement.classList.add('lap-item');
+                lapElement.innerHTML = `
+                    <span>Lap ${lapCount}</span>
+                    <span>${display.innerText}</span>
+                `;
+                
+                lapsContainer.prepend(lapElement);
+            }
+        }
+
+        function stop() { 
+            clearInterval(timer); 
+            timer = null; 
+        }
+
+        function reset() { 
+            stop(); 
+            time = 0; 
+            lapCount = 0;
+            display.innerText = "00:00:00"; 
+            lapsContainer.innerHTML = ""; 
+        }
     </script>
 </body>
 </html>
